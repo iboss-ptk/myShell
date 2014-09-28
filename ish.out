@@ -1,0 +1,35 @@
+Script started on Sat Sep 27 21:46:15 2014
+[?1034hbash-3.2$ /[K./ish
+5550558721 Supanat Potiwarakorn > date
+Sat Sep 27 21:46:42 ICT 2014
+5550558721 Supanat Potiwarakorn > w
+21:46  up 14:12, 3 users, load averages: 0.95 1.02 1.15
+USER     TTY      FROM              LOGIN@  IDLE WHAT
+macbookair console  -                 7:34   14:12 -
+macbookair s000     -                21:29      16 -bash
+macbookair s001     -                21:31       - script ish.out
+5550558721 Supanat Potiwarakorn > ls
+a.out	ish.c	ish.out
+5550558721 Supanat Potiwarakorn > ps
+  PID TTY           TIME CMD
+ 6102 ttys000    0:00.10 -bash
+ 6164 ttys001    0:00.14 -bash
+ 6398 ttys001    0:00.01 script ish.out
+ 6399 ttys002    0:00.01 /bin/bash -i
+ 6401 ttys002    0:00.00 ./a.out
+5550558721 Supanat Potiwarakorn > pwd
+/Users/macbookair/os
+5550558721 Supanat Potiwarakorn > cal
+   September 2014
+Su Mo Tu We Th Fr Sa
+    1  2  3  4  5  6
+ 7  8  9 10 11 12 13
+14 15 16 17 18 19 20
+21 22 23 24 25 26 27
+28 29 30
+
+5550558721 Supanat Potiwarakorn > exit
+bash-3.2$ exit
+exit
+
+Script done on Sat Sep 27 21:47:54 2014
