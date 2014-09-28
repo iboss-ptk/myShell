@@ -10,59 +10,33 @@ int main(int argc, char** argv)
 	char command[MAXLEN]; 
 	char **arguments; 	
 
-	// infinite loop for multi-command feature
+	
 	while(1)
 	{
-		// prompt. waiting for input
-		printf("5550558721 Supanat Potiwarakorn > "); 
-
-		// waiting for input ( which should be a UNIX command )
-		if (fgets(command, MAXLEN, stdin) == '\n'); 
-
-		// parse the string input to map to the existing programs and it's options ( something like gcc -o <- the "-o" is called option )
-		// tokenize function is declared below
+		printf("5550558721 Supanat Potiwarakorn > ");
+		if (fgets(command, MAXLEN, stdin) == '\n');
 		if (tokenize(command, DELIMITERS, &arguments) < 0) { 
 			fprintf(stderr, "Failed to parse command"); 
 			exit(1); 
 		}
-
-		// check if the input is "exit" ( I use strcasecmp instead of stringcmp to ignore case, can be "Exit","EXIT","ExIt" or else )
-		if (strcasecmp(arguments[0], "exit") == 0) exit(EXIT_SUCCESS); 
-
-		// reaching here means user does not attempt to exit. 
-		// so the program will try to execute the command which is already parsed by tokenize function
-		cmd_execute(arguments); // code of this function, see below.
+		if (strcasecmp(arguments[0], "exit") == 0) exit(EXIT_SUCCESS); // exiting command
+		cmd_execute(arguments); // create a new child process for execution
 	}  
 
 } 
 
-/*
- * Since the execvp command which is used to execute the command will tranform the current process which this program is using into
- * it's own process, it will terminate itself and will never go back to the loop.
- * For example, if user type "ls" the program will search for ls program in path variable ( in my case, it is stored in "/bin/ls" which is declared in $PATH.
- * So we can call this program globally ). The ls program print out the files in current directory, then terminate, no more prompt, no more loop, which we need.
- *
- * The purpose of this function is to identically duplicate the process. So now we have the parent process that generate child process.
- * And the two process run parallely.
- */
 int cmd_execute(char **argv)
 {
-	// fork generate child process with current execution situation. In parent process, it will return the child process's id.
-	// in child process, this will return 0. So now we can identify that which process is running.
-	pid_t pid = fork(); 
+	pid_t pid = fork();
 	int status;
 
-	// if it's failed to fork, it'll return negative integer
 	if (pid < 0)
 	{
 		printf("FORKING FAILED!!");
 		exit(EXIT_FAILURE); // exit(1)
 	}
-
-	// This case is what we want to do on child process.
 	else if (pid == 0)
 	{
-		// when error occur, execvp return -1
 		int res = execvp(*argv, argv);
 		if (res < 0)
 		{
